@@ -53,7 +53,7 @@ TEMPLATE_TEST_CASE("Test complex acos", "[acos]", double, float, sycl::half) {
   else
     cplx_out[0] = sycl::ext::cplx::cos<T>(sycl::ext::cplx::acos<T>(cplx_input));
 
-  check_results(cplx_out[0], std_out, /*tol_multiplier*/ 5);
+  check_results(cplx_out[0], std_out, /*tol_multiplier*/ 2);
 
   sycl::free(cplx_out, Q);
 }
