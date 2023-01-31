@@ -52,7 +52,11 @@ jobs:
       run: |
         env | grep oneapi
     - name: cmake
-      run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl"
+      # Does not work as icpx enable fast_math by default
+      # run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl"
+
+      run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -fp-model=precise"
+
 
       # Does not disable fast_math
       # run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fno-fast-math"
