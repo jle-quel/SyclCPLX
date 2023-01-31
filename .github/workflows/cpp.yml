@@ -52,7 +52,9 @@ jobs:
       run: |
         env | grep oneapi
     - name: cmake
-      run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fp-model=precise"
+      # run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fp-model=precise"
+      run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fno-fast-math"
+      # run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fp-model=strict -fno-fast-math"
     - name: build
       run: cmake --build build-sycl -v
     - name: run tests
