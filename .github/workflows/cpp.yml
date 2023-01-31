@@ -47,13 +47,19 @@ jobs:
     - name: setup compiler env
       run: |
         which icpx
+        which clang++
+        clang++ -fsycl
         echo "CXX=$(which icpx)" >> $GITHUB_ENV
     - name: env check
       run: |
         env | grep oneapi
     - name: cmake
+      # Does not disable fast_math
+      # run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fno-fast-math"
+
+      run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -fp-model=precise"
       # run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fp-model=precise"
-      run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fno-fast-math"
+      # run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fno-fast-math"
       # run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fp-model=strict -fno-fast-math"
     - name: build
       run: cmake --build build-sycl -v
