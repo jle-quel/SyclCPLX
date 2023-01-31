@@ -47,7 +47,7 @@ TEMPLATE_TEST_CASE("Test complex acos", "[acos]", double, float, sycl::half) {
   // }
 
 
-  Check cplx::complex output from host
+  // Check cplx::complex output from host
   if (is_error_checking)
     cplx_out[0] = sycl::ext::cplx::acos<T>(cplx_input);
   else
