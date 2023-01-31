@@ -62,7 +62,7 @@ jobs:
       # run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -g -fp-model=precise"
 
       # OK: Does work and disable fast_math
-      run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fp-model=strict"
+      run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fp-model=precise"
 
     - name: build
       run: cmake --build build-sycl -v
