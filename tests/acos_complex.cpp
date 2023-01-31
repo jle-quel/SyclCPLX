@@ -43,8 +43,8 @@ TEMPLATE_TEST_CASE("Test complex acos", "[acos]", double, float, sycl::half) {
     }
     Q.wait();
 
-    bool val = detail::almost_equal(cplx_out[0], std_out, 2 * SYCL_CPLX_TOL_ULP);
-    std::cout << "(" << cplx_out->real() << ", " << cplx_out->imag() << ") == (" << std_out.real() << ", " << std_out.imag() << ") : " << val << "\n";
+    // bool val = detail::almost_equal(cplx_out[0], std_out, 2 * SYCL_CPLX_TOL_ULP);
+    // std::cout << "(" << cplx_out->real() << ", " << cplx_out->imag() << ") == (" << std_out.real() << ", " << std_out.imag() << ") : " << val << "\n";
 
     check_results(cplx_out[0], std_out, /*tol_multiplier*/ 2);
   }
@@ -56,9 +56,9 @@ TEMPLATE_TEST_CASE("Test complex acos", "[acos]", double, float, sycl::half) {
   else
     cplx_out[0] = sycl::ext::cplx::cos<T>(sycl::ext::cplx::acos<T>(cplx_input));
 
-  bool val = detail::almost_equal(cplx_out[0], std_out, 2 * SYCL_CPLX_TOL_ULP);
-  std::cout << "(" << cplx_out->real() << ", " << cplx_out->imag() << ") == (" << std_out.real() << ", " << std_out.imag() << ") : " << val << "\n";
-  std::cout << "\n";
+  // bool val = detail::almost_equal(cplx_out[0], std_out, 2 * SYCL_CPLX_TOL_ULP);
+  // std::cout << "(" << cplx_out->real() << ", " << cplx_out->imag() << ") == (" << std_out.real() << ", " << std_out.imag() << ") : " << val << "\n";
+  // std::cout << "\n";
 
   check_results(cplx_out[0], std_out, /*tol_multiplier*/ 2);
 
