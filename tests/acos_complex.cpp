@@ -30,9 +30,9 @@ TEMPLATE_TEST_CASE("Test complex acos", "[acos]", double, float, sycl::half) {
   if (is_error_checking)
     std_out = std::acos(std_in);
 
-  // // Check cplx::complex output from device
-  // if (is_type_supported<T>(Q)) {
-  //   if (is_error_checking) {
+  // Check cplx::complex output from device
+  if (is_type_supported<T>(Q)) {
+    // if (is_error_checking) {
   //     Q.single_task(
   //         [=]() { cplx_out[0] = sycl::ext::cplx::acos<T>(cplx_input); });
   //   } else {
@@ -40,19 +40,19 @@ TEMPLATE_TEST_CASE("Test complex acos", "[acos]", double, float, sycl::half) {
   //       cplx_out[0] =
   //           sycl::ext::cplx::cos<T>(sycl::ext::cplx::acos<T>(cplx_input));
   //     });
-  //   }
-  //   Q.wait();
+    // }
+    // Q.wait();
 
-    // ERROR IS COMING FROM DEVICE COMPILING
+    // ERROR IS COMING FROM DEVICE COMPILATION
     // SYMBOL NOT FOUND
     // CompilerException Failed to lookup symbol
     // JIT session error: Symbols not found: [ _Z5isinfDh, _Z8isfiniteDh ]
 
-    // bool val = detail::almost_equal(cplx_out[0], std_out, 2 * SYCL_CPLX_TOL_ULP);
-    // std::cout << "(" << cplx_out->real() << ", " << cplx_out->imag() << ") == (" << std_out.real() << ", " << std_out.imag() << ") : " << val << "\n";
+    bool val = detail::almost_equal(cplx_out[0], std_out, 2 * SYCL_CPLX_TOL_ULP);
+    std::cout << "(" << cplx_out->real() << ", " << cplx_out->imag() << ") == (" << std_out.real() << ", " << std_out.imag() << ") : " << val << "\n";
 
-    // check_results(cplx_out[0], std_out, /*tol_multiplier*/ 2);
-  // }
+    check_results(cplx_out[0], std_out, /*tol_multiplier*/ 2);
+  }
 
 
   // Check cplx::complex output from host
@@ -74,5 +74,7 @@ TEMPLATE_TEST_CASE("Test complex acos", "[acos]", double, float, sycl::half) {
 // OK
 
 
-// The host code and the check
-//?
+// The host code and the host check
+// OK
+
+// The device check and the host code and the host check
