@@ -252,9 +252,12 @@ template<class T> complex<T> tanh (const complex<T>&);
 #endif
 #endif
 
-// #if defined(__FAST_MATH__) || defined(_GLIBCXX_FAST_MATH) || defined(_M_FP_FAST)
+
+
+#if defined(__FAST_MATH__) || defined(_GLIBCXX_FAST_MATH) || defined(_M_FP_FAST)
+static_assert(false);
 // #define _SYCL_EXT_CPLX_FAST_MATH
-// #endif
+#endif
 
 #define _SYCL_EXT_CPLX_BEGIN_NAMESPACE_STD namespace _SYCL_CPLX_NAMESPACE {
 #define _SYCL_EXT_CPLX_END_NAMESPACE_STD }
