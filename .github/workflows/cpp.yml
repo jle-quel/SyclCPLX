@@ -47,8 +47,6 @@ jobs:
     - name: setup compiler env
       run: |
         which icpx
-        which clang++
-        clang++ -fsycl
         echo "CXX=$(which icpx)" >> $GITHUB_ENV
     - name: env check
       run: |
