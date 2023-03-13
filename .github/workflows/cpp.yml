@@ -42,9 +42,13 @@ jobs:
         clinfo
     - name: build_intel_llvm
       run: |
-          ls -l
-          echo $HOME
-          ls -l $HOME
+          cd $HOME
+          git clone https://github.com/intel/llvm.git
+          cd llvm
+          mkdir build
+          cd build
+          python3 ../buildbot/configure.py -o .
+          python3 ../buildbot/compile.py
 
 
     # - name: sycl-ls
