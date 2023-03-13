@@ -40,13 +40,17 @@ jobs:
         mkdir -p /etc/OpenCL/vendors
         echo "libintelocl.so" > /etc/OpenCL/vendors/intel-cpu.icd
         clinfo
-    - name: sycl-ls
+    - name: build_intel_llvm
       run: |
-        which sycl-ls
-        sycl-ls
-    - name: clang++
-      run: |
-        ls -l /opt/intel/oneapi/compiler/2023.0.0/linux/bin/
+          ls -l
+          echo $HOME
+          ls -l $HOME
+
+
+    # - name: sycl-ls
+    #   run: |
+    #     which sycl-ls
+    #     sycl-ls
     # - name: setup compiler env
     #   run: |
     #     which icpx
