@@ -42,8 +42,8 @@ jobs:
         clinfo
     - name: install_python3
       run: |
-        apt-get update
-        apt-get install python3
+        apt-get update -y
+        apt-get install -y python3
     - name: build_intel_llvm
       run: |
         cd $HOME
