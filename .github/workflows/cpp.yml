@@ -44,6 +44,8 @@ jobs:
       run: |
         which sycl-ls
         sycl-ls
+        which clang++
+        clang++ -fsycl
     - name: setup compiler env
       run: |
         which icpx
