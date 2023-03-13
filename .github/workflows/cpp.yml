@@ -46,7 +46,6 @@ jobs:
         sycl-ls
     - name: clang++
       run: |
-        which clang++
         ls -l /opt/intel/oneapi/compiler/2023.0.0/linux/bin/
     # - name: setup compiler env
     #   run: |
