@@ -67,7 +67,7 @@ TEMPLATE_TEST_CASE("Test complex acos", "[acos]", double, float, sycl::half) {
     std::cout << "  std::cplx = (" << std_out.real() << ", " << std_out.imag() << ")\n";
     std::cout << "\n";
 
-    // check_results(cplx_out[0], std_out, /*tol_multiplier*/ 2);
+    check_results(cplx_out[0], std_out, /*tol_multiplier*/ 2);
   }
 
   // Check cplx::complex output from host
@@ -83,7 +83,7 @@ TEMPLATE_TEST_CASE("Test complex acos", "[acos]", double, float, sycl::half) {
   std::cout << "  std::cplx = (" << std_out.real() << ", " << std_out.imag() << ")\n";
   std::cout << "\n";
 
-  // check_results(cplx_out[0], std_out, /*tol_multiplier*/ 2);
+  check_results(cplx_out[0], std_out, /*tol_multiplier*/ 2);
 
   sycl::free(cplx_out, Q);
 

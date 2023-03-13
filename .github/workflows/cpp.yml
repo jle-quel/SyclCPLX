@@ -52,8 +52,8 @@ jobs:
       run: |
         env | grep oneapi
     - name: cmake
-      run: mkdir build ; cd build ; cmake -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fp-model=precise" -GNinja ..
+      run: cmake -S . -B build-sycl -DCMAKE_CXX_FLAGS="-fsycl -O2 -g -fp-model=precise"
     - name: build
-      run: ninja
+      run: cmake --build build-sycl -v
     - name: run tests
-      run: ctest -V
+      run: env CTEST_OUTPUT_ON_FAILURE=1 cmake --build build-sycl -v -t test
