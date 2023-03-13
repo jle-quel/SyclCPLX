@@ -47,8 +47,8 @@ jobs:
           cd llvm
           mkdir build
           cd build
-          python3 ../buildbot/configure.py -o .
-          python3 ../buildbot/compile.py
+          python ../buildbot/configure.py -o .
+          python ../buildbot/compile.py
 
 
     # - name: sycl-ls
