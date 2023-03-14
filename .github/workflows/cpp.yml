@@ -32,6 +32,7 @@ jobs:
       PATH: /opt/intel/oneapi/mpi/2021.8.0//libfabric/bin:/opt/intel/oneapi/mpi/2021.8.0//bin:/opt/intel/oneapi/mkl/2023.0.0/bin/intel64:/opt/intel/oneapi/dev-utilities/2021.8.0/bin:/opt/intel/oneapi/debugger/2023.0.0/gdb/intel64/bin:/opt/intel/oneapi/compiler/2023.0.0/linux/lib/oclfpga/bin:/opt/intel/oneapi/compiler/2023.0.0/linux/bin/intel64:/opt/intel/oneapi/compiler/2023.0.0/linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       CMAKE_BUILD_PARALLEL_LEVEL: 8
       LLVM_HOME: $HOME/llvm
+      CPLX_HOME: /__w/SyclCPLX/SyclCPLX
 
     steps:
     - uses: actions/checkout@v3
@@ -43,25 +44,28 @@ jobs:
         mkdir -p /etc/OpenCL/vendors
         echo "libintelocl.so" > /etc/OpenCL/vendors/intel-cpu.icd
         clinfo
-        echo $PWD
-    # - name: install utilities
-    #   run: |
-    #     apt-get update -y
-    #     apt-get install -y python3
-    #     apt-get install -y ninja-build
-    # - name: build dpc++
-    #   run: |
-    #     cd $HOME
-    #     git clone https://github.com/intel/llvm.git
-    #     cd llvm
-    #     mkdir build
-    #     cd build
-    #     python3 ../buildbot/configure.py -o .
-    #     python3 ../buildbot/compile.py
-    # - name: build sycl::complex
-    #   run: cmake -DCMAKE_CXX_COMPILER=$LLVM_HOME/build/bin/clang++ -DCMAKE_CXX_FLAGS="-fsycl" -GNinja ..
-    # - name: run sycl::complex test
-    #   run: env LD_LIBRARY_PATH=$LLVM_HOME/build/lib:$LD_LIBRARY_PATH ninja test
+    - name: install utilities
+      run: |
+        apt-get update -y
+        apt-get install -y python3
+        apt-get install -y ninja-build
+    - name: build dpc++
+      run: |
+        cd $HOME
+        git clone https://github.com/intel/llvm.git
+        cd llvm
+        mkdir build
+        cd build
+        python3 ../buildbot/configure.py -o .
+        python3 ../buildbot/compile.py
+    - name: build sycl::complex
+      run: |
+        cd $CPLX_HOME
+        mkdir build
+        cd build
+        cmake -DCMAKE_CXX_COMPILER=$LLVM_HOME/build/bin/clang++ -DCMAKE_CXX_FLAGS="-fsycl" -GNinja ..
+    - name: run sycl::complex test
+      run: env CTEST_OUTPUT_ON_FAILURE=1 LD_LIBRARY_PATH=$LLVM_HOME/build/lib:$LD_LIBRARY_PATH ninja test
 
 # - name: sycl-ls
 #   run: |
